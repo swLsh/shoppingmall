@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.koreamall.mapper.CustomerServiceMapper">
+    <resultMap id="oneOneOneWithFilesWithAnswers" type="OneOnOneDTO" autoMapping="true">
+        <id property="no" column="one_on_one_no" />
+        <collection property="files" javaType="list" ofType="FileDTO" autoMapping="true">
+            <id property="UUID" column="UUID" />
+        </collection>
+        <collection property="answers" javaType="list" ofType="OneOnOneAnswerDTO" autoMapping="true">
+            <id property="no" column="one_on_one_answer_no" />
+        </collection>
+    </resultMap>
+
+    <insert id="insertOneOnOnePost">
+        INSERT INTO `one_on_one`
+        (`no`, `title`, `writer`, `content`, `is_opened`, `password`)
+        VALUES
+        (NULL, #{title}, #{writer}, #{content}, #{isOpened}, #{password})
+    </insert>
+
+    <insert id="insertOneOnOneFiles">
+        <selectKey keyProperty="no" order="BEFORE" resultType="int">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO `one_on_one_files`
+        (UUID, one_on_one_no, original_filename, data) VALUES
+        <foreach collection="files" item="file" separator=",">
+            (#{file.UUID}, #{no}, #{file.originalFileName}, #{file.data})
+        </foreach>
+    </insert>
+    <update id="updateOneOnOnePostViewCount">
+        UPDATE `one_on_one` SET `view_count` = `view_count` + 1
+        WHERE `no` = #{no}
+    </update>
+
+
+    <select id="selectOneOnOneByNo" resultType="OneOnOneDTO" resultMap="oneOneOneWithFilesWithAnswers">
+        SELECT
+        `O`.`no` AS 'one_on_one_no',
+        `OA`.`no` AS 'one_on_one_answer_no',
+        `O`.*,
+        `OF`.*,
+        `OA`.*
+        FROM `one_on_one` `O`
+        LEFT OUTER JOIN `one_on_one_files` `OF`
+        ON `O`.`no` = `OF`.`one_on_one_no`
+        LEFT OUTER JOIN `one_on_one_answer` `OA`
+        ON `O`.`no` = `OA`.`one_on_one_no`
+        WHERE `O`.no = #{no};
+    </select>
+
+    <insert id="insertOneOnOneAnswerOfOneOnOneNo">
+        INSERT INTO `one_on_one_answer` VALUES
+        (NULL, DEFAULT, #{oneOnOneNo}, #{answer}, DEFAULT);
+    </insert>
+
+    <select id="selectOneOnOneFileByUUID" resultType="FileDTO">
+        SELECT * FROM `one_on_one_files`
+        WHERE `UUID` = #{UUID}
+    </select>
+
+    <select id="selectOneOnOneIsOpened" resultType="java.lang.Boolean">
+        SELECT `is_opened` FROM `one_on_one` WHERE no = #{no}
+
+    </select>
+    <select id="selectOneOnOnes" resultType="OneOnOneDTO">
+        SELECT * FROM `one_on_one`
+        <where>
+            <if test="query != null">
+                <choose>
+                    <when test="keyword == 'title'">
+                        `title` LIKE CONCAT('%', #{query}, '%')
+                    </when>
+                    <when test="keyword == 'writer'">
+                        `writer` LIKE CONCAT('%', #{query}, '%')
+                    </when>
+                    <when test="keyword == 'content'">
+                        `content` LIKE CONCAT('%', #{query}, '%')
+                    </when>
+                </choose>
+            </if>
+        </where>
+        ORDER BY `no` DESC
+    </select>
+    <select id="selectOneOnOnePasswordIsCorrect" resultType="java.lang.Boolean">
+        SELECT COUNT(*) = 1 FROM `one_on_one`
+        WHERE `no` = #{no} AND `password` = #{password}
+    </select>
+
+<!--테스트-->
+    <insert id="insertOneOnOneAnswerFiles">
+        <selectKey keyProperty="no" order="BEFORE" resultType="int">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO `one_on_one_files`
+        (UUID, one_on_one_no, original_filename, data)
+        VALUES
+        <foreach collection="files" item="file" separator=",">
+            (#{file.UUID}, #{one_on_one_no}, #{file.originalFileName}, #{file.data}, TRUE)
+        </foreach>
+    </insert>
+
+    <select id="selectOneOnOneAnswerFiles" resultType="FileDTO">
+        SELECT * FROM `one_on_one_files`
+        WHERE `UUID` = #{UUID} AND `is_answer` = TRUE
+    </select>
+
+
+</mapper>

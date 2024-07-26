@@ -1,0 +1,96 @@
+    <!DOCTYPE html>
+    <html lang="ko"
+          xmlns:th="https://www.thymeleaf.org"
+          xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+          xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+          layout:decorate="~{layout/main-layout}"
+    >
+    <head>
+        <meta charset="UTF-8">
+        <title>장바구니</title>
+        <link rel="stylesheet" href="/static/css/user/cart.css" th:href="@{/css/user/cart.css}">
+        <script src="https://kit.fontawesome.com/d19fdaba43.js" crossorigin="anonymous"></script>
+        <script src="../../static/js/user/cart.js" th:src="@{/js/user/cart.js}" defer></script>
+
+    </head>
+    <body>
+    <main layout:fragment="main">
+        <main layout:fragment="main">
+            <h1>장바구니</h1>
+            <form id="order-form" th:action="@{/user/order}" method="post" class="cart-container">
+                <section class="cart-info-container">
+                    <div class="cart-select-container">
+                        <label>
+                            <input type="checkbox">
+                            <span>전체선택</span>
+                        </label>
+                        <button id="cart-all-rm-btn" type="button">선택삭제</button>
+                    </div>
+                    <div th:if="${carts.size() == 0}">
+                        <b>상품이 존재하지 않습니다.</b>
+                    </div>
+                    <div class="product"  th:each="cart: ${carts}" th:with="product=${cart.product}">
+                        <input type="hidden" name="no" th:value="${cart.no}">
+                        <input type="hidden" class="product-no" th:value="${product.no}">
+                        <label><input type="checkbox"></label>
+                        <a th:href="@{|/product/${product.no}|}" class="product-img-container">
+                            <img th:src="|data:image/*;base64, ${product.images[0].url}|" src="https://i.namu.wiki/i/l0x04r27DjSQmS-WgYk6I5x6IkKMyvZjRMyK5dI3EMoMikzCd2Kfl2SMRdvL3-y4zpxI_qLP-fs3QToSR7AU3g.webp" alt="#">
+                        </a>
+                        <div class="product-information-container">
+                            <span class="category" th:text="${product.category.name}">KIDS</span>
+                            <div class="name">
+                                <a th:href="@{|/product/${product.no}|}" th:text="${product.name}">아쿠아 라글란 래쉬가드</a>
+                            </div>
+                            <div>
+                                <b>색상:</b>
+                                <span class="color" th:text="${cart.color}">IVY GREEN</span>
+                            </div>
+                            <div>
+                                <b>사이즈:</b>
+                                <span class="size" th:text="${cart.size}">130</span>
+                            </div>
+                            <div>
+                                <b>수량:</b>
+                                <span class="amount" th:text="|${cart.amount}개|">3개</span>
+                            </div>
+                            <div class="price">
+                                <b class="price" th:data="${product.price}" th:text="${#numbers.formatInteger(product.price, 3, 'COMMA')}">123,900원</b>
+                            </div>
+                        </div>
+                        <div class="rm-btn-container">
+                            <button type="button"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="cart-summary-container">
+                    <div>
+                        <div>
+                            <span>총 상품금액</span>
+                            <span th:if="${carts.size() == 0}">0원</span>
+                            <span th:unless="${carts.size() == 0}" th:text="|${#numbers.formatInteger(#aggregates.sum(carts.![product.price]), 3, 'COMMA')}원|">733,000원</span>
+                        </div>
+                        <div>
+                            <span>상품 할인금액</span>
+                            <span>0원</span>
+                        </div>
+                        <div>
+                            <span>배송비</span>
+                            <span>0원</span>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="total-price">
+                        <span>총 결제 예상 금액</span>
+                        <span th:if="${carts.size() == 0}">0원</span>
+                        <span th:unless="${carts.size() == 0}" th:text="|${#numbers.formatInteger(#aggregates.sum(carts.![product.price]), 3, 'COMMA')}원|">733,000원</span>
+                    </div>
+
+                    <button type="button" id="cart-buy-btn">구매하기</button>
+                </section>
+            </form>
+        </main>
+    </body>
+    </html>

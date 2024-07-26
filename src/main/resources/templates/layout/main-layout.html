@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Main Layout</title>
+    <link rel="stylesheet" href="../../static/css/public/public.css" th:href="@{/css/public/public.css}">
+    <link rel="stylesheet" href="../../static/css/public/header.css" th:href="@{/css/public/header.css}">
+    <link rel="stylesheet" href="../../static/css/public/footer.css" th:href="@{/css/public/footer.css}">
+    <script src="../../static/js/user/main.js" th:src="@{/js/user/main.js}" defer></script>
+
+
+</head>
+<body>
+<header th:replace="~{layout/header :: header}"></header>
+<main layout:fragment="main"></main>
+<footer  th:replace="~{layout/footer :: footer}"></footer>
+
+</body>
+</html>

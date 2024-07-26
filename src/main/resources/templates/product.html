@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main-layout}"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>상품 상세페이지</title>
+    <link rel="stylesheet" href="/static/css/product.css" th:href="@{/css/product.css}">
+    <script src="/static/js/product.js" th:src="@{/js/product.js}" defer></script>
+    <script src="/static/js/user/main_carousell.js " th:src="@{/js/user/main_carousell.js}" defer ></script>
+    <script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"></script>
+    <script src="https://unpkg.com/embla-carousel-autoplay/embla-carousel-autoplay.umd.js"></script>
+    <script src="https://kit.fontawesome.com/d19fdaba43.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<main layout:fragment="main">
+<section class="all-product-section">
+<section id="product-image-section">
+        <ul>
+            <li th:each="image: ${product.images}">
+                <img th:src="|data:image/*;base64, ${image.url}|" alt="#">
+<!--                <img th:src="|data:image/*;base64, ${image.url}|" alt="#">-->
+<!--            <img src="https://filacdn.styleship.com/filaproduct2/data/productimages/a/4/FS2RSG2112X_BLK.jpg?v=20" alt="">-->
+<!--            <img src="https://filacdn.styleship.com/filaproduct2/data/productimages/b/4/FS2RSG2112X_BLK.jpg?v=20" alt="">-->
+            </li>
+
+<!--            <li>-->
+<!--            <img src="https://filacdn.styleship.com/filaproduct2/data/productimages/c/4/FS2RSG2112X_BLK.jpg?v=20 " alt="">-->
+<!--            <img src="https://filacdn.styleship.com/filaproduct2/data/productimages/d/4/FS2RSG2112X_BLK.jpg?v=20" alt="">-->
+<!--            </li>-->
+
+
+<!--            <li>-->
+<!--            <img src="https://filacdn.styleship.com/filaproduct2/data/productimages/e/4/FS2RSG2112X_BLK.jpg?v=20" alt="">-->
+<!--            <img src="https://filacdn.styleship.com/filaproduct2/data/productimages/f/4/FS2RSG2112X_BLK.jpg?v=20" alt="">-->
+<!--            </li>-->
+
+<!--            <li>-->
+<!--            <img src="https://filacdn.styleship.com/filaproduct2/data/productimages/g/4/FS2RSG2112X_BLK.jpg?v=20" alt="">-->
+<!--            <img src="https://filacdn.styleship.com/filaproduct2/data/productimages/h/4/FS2RSG2112X_BLK.jpg?v=20" alt="">-->
+<!--            </li>-->
+        </ul>
+    <h1 id="model-cut-h1">모델 컷</h1>
+    <div class="embla" >
+        <div class="embla__container">
+            <div class="embla__slide">
+                <img class="img-slide" src="https://filacdn.styleship.com/filacontent2/data/filastyle/1100FS2RSG2112XBLK_3_1.jpg" alt="">
+            </div>
+            <div class="embla__slide">
+                <img class="img-slide" src="https://filacdn.styleship.com/filacontent2/data/filastyle/1100FS2RSG2112XBLK_3_2.jpg" alt="">
+            </div>
+            <div class="embla__slide">
+                <img class="img-slide" src="https://filacdn.styleship.com/filacontent2/data/filastyle/1100FS2RSG2112XBLK_3_3.jpg" alt="">
+            </div>
+            <div class="embla__slide">
+                <img class="img-slide" src="https://filacdn.styleship.com/filacontent2/data/filastyle/1100FS2RSG2112XBLK_3_5.jpg" alt="">
+            </div>
+        </div>
+    </div>
+        <div class="model-information-div">키 186cm / 착용 사이즈 L, 키 173cm / 착용 사이즈 S</div>
+        <div class="model-information-div">모델 착용 이미지보다 제품컷 이미지의 컬러가 정확합니다.</div>
+    </div>
+</section>
+<section id="product-description-section">
+    <div th:text="${product.tag}"> 남녀공용 | 레귤러핏 | 라이프스타일</div>
+    <h1 th:text="${product.name}">리니어 스몰로고 반팔티</h1>
+    <div  th:text="|${#numbers.formatInteger(product.price, 3, 'COMMA')}원|">35,000원</div>
+    <div th:text="${product.describe}">휠라의 시그니처 리니어 로고를 활용한 스몰 그래픽 티셔츠입니다.</div>
+    <div>프리미엄 CP쥬리(코튼폴리 혼방 소재)를 사용하여 터치감이 우수하고 신축성 및 회복력이 좋으며 세탁 후 형태 변형이 적습니다.</div>
+    <div>세븐 스트라이프 디자인의 라벨을 활용해 포인트를 주었습니다.</div>
+    <div th:text="${product.material}">제품소재 : 면 75%, 폴리에스터 25%</div>
+    <div>상품 정보 고시</div>
+</section>
+
+    <section id="product-select-buttons-section">
+    <form id="order-form" method="post" th:action="@{/order/product}">
+        <input type="hidden" name="product.no" th:value="${product.no}">
+        <div class="select-buttons colors">
+            <div >컬러</div>
+            <input type="hidden" name="color">
+    <th:block th:each="color:${product.colors.split(',')}">
+        <button  type="button" th:class="${color}" th:text="${color}"></button>
+    </th:block>
+        </div>
+
+
+    <div class="select-buttons sizes">
+        <div>사이즈</div>
+        <input type="hidden" name="size">
+        <th:block th:each="size: ${product.sizes.split(',')}">
+            <button class="slect-button" type="button" th:text="${size}">085(XS)</button>
+        </th:block>
+
+<!--        <button class="slect-button">090(S)</button>-->
+<!--        <button class="slect-button">095(M)</button>-->
+<!--        <button class="slect-button">100(L)</button>-->
+<!--        <button class="slect-button">105(XL)</button>-->
+<!--        <button class="slect-button">110(2XL)</button>-->
+    </div>
+    <label class="amount-label">
+        <button type="button">
+            <i class="fa-solid fa-minus"></i>
+        </button>
+        <input type="number" name="amount" min="1" max="100" value="1" step="1">
+        <button type="button">
+            <i class="fa-solid fa-plus"></i>
+        </button>
+    </label>
+    <div>
+        <span>주문금액</span>
+        <span th:text="|${#numbers.formatInteger(product.price, 3, 'COMMA')}원|">35,000원</span>
+    </div>
+        <div>
+        <button class="buy-button" id="buy-btn" type="button">바로 구매하기</button>
+        <button class="buy-button" id="cart-btn" type="button">카트에 담기</button>
+    </div>
+    <a href="#" class="product-review">
+        <h4>상품리뷰</h4>
+        <span class="count">3</span>
+        <i class="fa-solid fa-plus"></i>
+    </a>
+    </form>
+
+</section>
+</section>
+
+<section class="recommend-product-section">
+    <h3>이 상품을 본 고객이 함께 본 상품</h3>
+    <div class="recommend-item-container">
+        <a href="#" class="item">
+            <img src="https://filacdn.styleship.com/filaproduct2/data/productimages/a/3/FS2RSG2325X_INA.jpg" alt="">
+            <h4>기능성 베이직 반팔티</h4>
+            <span th:text="|${#numbers.formatInteger(product.price, 3, 'COMMA')}원|">35,000원</span>
+        </a>
+        <a href="#" class="item">
+            <img src="https://filacdn.styleship.com/filaproduct2/data/productimages/a/3/FS2RSG2172F_OWH.jpg" alt="">
+            <h4>&lt;한소희 착용&gt;면혼방 사이드셔링 반팔티</h4>
+            <span th:text="|${#numbers.formatInteger(product.price, 3, 'COMMA')}원|">35,000원</span>
+        </a>
+        <a href="#" class="item">
+            <img src="https://filacdn.styleship.com/filaproduct2/data/productimages/a/3/FS2RSG2192X_OWH.jpg" alt="">
+            <h4>&lt;COLD WAVE&gt;그래픽 프린트 냉감 티셔츠</h4>
+            <span th:text="|${#numbers.formatInteger(product.price, 3, 'COMMA')}원|">35,000원</span>
+        </a>
+        <a href="#" class="item">
+            <img src="https://filacdn.styleship.com/filaproduct2/data/productimages/a/3/FS2RSG2192X_BLK.jpg" alt="">
+            <h4>&lt;COLD WAVE&gt;그래픽 프린트 냉감 티셔츠</h4>
+            <span class="price">49,000 원</span>
+        </a>
+    </div>
+</section>
+</main>
+</body>
+</html>

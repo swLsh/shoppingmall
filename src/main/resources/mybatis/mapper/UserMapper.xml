@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.koreamall.mapper.UserMapper">
+
+
+    <select id="selectUserById" resultType="UserDTO">
+        SELECT * FROM `user` WHERE `id` = #{id}
+    </select>
+    <select id="selectUserByCi" resultType="UserDTO">
+        SELECT * FROM `user` WHERE `ci` = #{ci}
+    </select>
+
+    <!--  =========== 회원가입 =================   -->
+    <insert id="insert_user">
+        INSERT INTO `user` VALUES
+            (#{id}, #{ci}, #{password},#{email},#{phone},#{name}, #{nickName}, #{profileImg.data})
+    </insert>
+
+    <!--  =========== 소셜 로그인 =================   -->
+    <select id="selectSocialUserById" resultType="SocialUserDTO">
+        SELECT * FROM `social_user` WHERE `id` = #{id}
+    </select>
+    <insert id="insert_socialUser">
+        INSERT INTO `social_user` VALUES
+            (#{id}, #{ci}, #{name}, #{email} , #{nickName}, #{profileImageUrl})
+    </insert>
+    <!--  =========== 장바구니 =================   -->
+    <resultMap id="selectCartWithProductMap" type="CartDTO" autoMapping="true">
+        <id property="no" column="cart_no" />
+        <association property="product" resultMap="com.koreamall.mapper.ProductMapper.selectProductWithCategoryAndImageMap" />
+    </resultMap>
+
+    <select id="selectCartsByUserId" resultType="CartDTO" resultMap="selectCartWithProductMap">
+        SELECT
+            CART.`no` AS 'cart_no',
+                P.no AS 'product_no',
+                P.name AS 'product_name',
+                PI.no AS 'image_no',
+                CAT.no AS 'category_no',
+                CAT.name AS 'category_name',
+                CART.*, P.*, PI.*, CAT.*
+        FROM `cart` CART
+                 INNER JOIN `product` P
+                            ON P.no = CART.product_no
+                 INNER JOIN `product_img` PI
+                            ON P.no = PI.product_no
+                 INNER JOIN `category` CAT
+                            ON CAT.no = P.category_no
+        WHERE CART.user_id = #{userId}
+    </select>
+
+    <select id="selectCartDuplicated" resultType="CartDTO">
+        SELECT * FROM `cart`
+        WHERE user_id = #{user.id} AND product_no = #{product.no}
+          AND color = #{color} AND size = #{size}
+    </select>
+
+    <insert id="insertCart">
+        INSERT INTO `cart` (no, user_id, product_no, amount, size, color)
+        VALUES (NULL, #{user.id}, #{product.no}, #{amount}, #{size}, #{color})
+    </insert>
+
+    <update id="updateCartAmount">
+        UPDATE `cart` SET amount = amount + #{amount} WHERE no = #{cartNo}
+    </update>
+
+    <delete id="deleteCart">
+        DELETE FROM `cart` WHERE
+        <foreach collection="carts" item="cart" separator="OR">
+            `no` = #{cartNo}
+        </foreach>
+    </delete>
+
+    <insert id="insertOrder">
+        INSERT INTO `order` (id, user_id, title, receiver_name, receiver_phone, receiver_postcode, receiver_address, memo, imp_uid, pay_method, paid_amount, paid_at)
+        VALUES (#{id}, #{user.id}, #{title}, #{receiverName}, #{receiverPhone}, #{receiverPostcode}, #{receiverAddress},
+                #{memo}, #{impUid}, #{payMethod}, #{paidAmount}, #{paidAt})
+    </insert>
+
+    <insert id="insertOrderProducts">
+        INSERT INTO `order_product` (no, order_id, product_no, price, size, color, amount) VALUES
+        <foreach collection="products" item="product" separator=",">
+            (NULL, #{id}, #{product.no}, #{product.price}, #{product.size}, #{product.color}, #{product.amount})
+        </foreach>
+    </insert>
+</mapper>

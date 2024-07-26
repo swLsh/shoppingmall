@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<header th:fragment="header">
+    <section id="top-menu-section">
+        <nav>
+            <a href="#">매장 찾기</a>
+            <a href="/customer_service/faq">고객센터</a>
+            <a sec:authorize="!authenticated" href="/user/register">가입하기</a>
+            <a sec:authorize="!authenticated" href="/user/login">로그인</a>
+            <form sec:authorize="authenticated" action="/user/logout" method="post">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                <button>로그아웃</button>
+            </form>
+        </nav>
+    </section>
+
+    <section id="main-menu-section">
+        <a href="/main">
+<!--            <svg viewBox="100 100 50 32" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M 150.07 131.439 L 131.925 100 L 122.206 105.606 L 137.112 131.439 L 150.07 131.439 Z M 132.781 131.439 L 120.797 110.692 L 111.078 116.298 L 119.823 131.439 L 132.781 131.439 Z M 109.718 121.401 L 115.509 131.439 L 102.551 131.439 L 100 127.007 L 109.718 121.401 Z" fill="black"></path></svg>-->
+        </a>
+        <nav id="main-menu-nav">
+            <ul>
+                <li>New & Featured</li>
+                <li th:each="category: ${categories}" th:text="${category.name}">
+                    Men
+                </li>
+                <li>Sale</li>
+            </ul>
+        </nav>
+        <nav id="menu-icon-nav">
+            <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+            <a href="#"><i class="fa-solid fa-heart"></i></a>
+            <a href="#"><i class="fa-solid fa-bag-shopping"></i></a>
+        </nav>
+    </section>
+
+    <section id="sub-menu-section">
+        <ul>
+            <li id="new-and-features-menu">
+                <ul class="sub-menu-list">
+                    <li><a href="#">New & Featured</a></li>
+                    <li><a href="#">신제품 전체</a></li>
+                    <li><a href="#">베스트셀러</a></li>
+                </ul>
+                <div class="sub-menu-list">
+                    <ul>
+                        <li><a href="#">Men's 신제품</a></li>
+                        <li><a href="#">신발</a></li>
+                        <li><a href="#">의류</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="#">Women's 신제품</a></li>
+                        <li><a href="#">신발</a></li>
+                        <li><a href="#">의류</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="#">Kid's 신제품</a></li>
+                        <li><a href="#">신발</a></li>
+                        <li><a href="#">의류</a></li>
+                    </ul>
+                </div>
+                <ul class="sub-menu-list">
+                    <li>조던</li>
+                    <li>Men</li>
+                    <li>Women</li>
+                    <li>Kids</li>
+                </ul>
+            </li>
+
+            <li id="men-menu" th:each="category1: ${categories}">
+                <ul class="sub-menu-list">
+                    <li><a href="#">New & Featured</a></li>
+                    <li><a href="#">신제품 전체</a></li>
+                    <li><a href="#">베스트셀러</a></li>
+                </ul>
+                <ul class="sub-menu-list" th:each="category2: ${category1.children}">
+                    <li>
+                        <a href="#" th:href="@{/product(category=${category2.no})}" th:text="${category2.name}">신발</a>
+                    </li>
+                    <li th:each="category3: ${category2.children}">
+                        <a href="#" th:href="@{/product(category=${category3.no})}" th:text="${category3.name}">라이프스타일</a>
+                    </li>
+                </ul>
+            </li>
+
+            <!--                <li id="women-menu">-->
+            <!--                    <ul class="sub-menu-list">-->
+            <!--                        <li><a href="#">New & Featured</a></li>-->
+            <!--                        <li><a href="#">신제품 전체</a></li>-->
+            <!--                        <li><a href="#">베스트셀러</a></li>-->
+            <!--                    </ul>-->
+            <!--                    <ul class="sub-menu-list">-->
+            <!--                        <li><a href="#">신발</a></li>-->
+            <!--                        <li><a href="#">라이프스타일</a></li>-->
+            <!--                        <li><a href="#">축구</a></li>-->
+            <!--                        <li><a href="#">러닝</a></li>-->
+            <!--                        <li><a href="#">테니스</a></li>-->
+            <!--                        <li><a href="#">골프</a></li>-->
+            <!--                        <li><a href="#">샌들 & 슬리퍼</a></li>-->
+            <!--                        <li><a href="#">트레이닝 & 짐</a></li>-->
+            <!--                    </ul>-->
+            <!--                    <ul class="sub-menu-list">-->
+            <!--                        <li><a href="#">의류</a></li>-->
+            <!--                        <li><a href="#">민소매 & 탱크 탑</a></li>-->
+            <!--                        <li><a href="#">반팔 티셔츠</a></li>-->
+            <!--                        <li><a href="#">ACG</a></li>-->
+            <!--                        <li><a href="#">러닝</a></li>-->
+            <!--                        <li><a href="#">탑 & 티셔츠</a></li>-->
+            <!--                    </ul>-->
+            <!--                    <ul class="sub-menu-list">-->
+            <!--                        <li><a href="#">용품</a></li>-->
+            <!--                        <li><a href="#">모자 & 헤드밴드</a></li>-->
+            <!--                        <li><a href="#">축구</a></li>-->
+            <!--                        <li><a href="#">가방</a></li>-->
+            <!--                        <li><a href="#">장갑</a></li>-->
+            <!--                        <li><a href="#">농구</a></li>-->
+            <!--                    </ul>-->
+            <!--                </li>-->
+            <!--                <li id="kids-menu">-->
+            <!--                    <ul class="sub-menu-list">-->
+            <!--                        <li><a href="#">New & Featured</a></li>-->
+            <!--                        <li><a href="#">신제품 전체</a></li>-->
+            <!--                        <li><a href="#">베스트셀러</a></li>-->
+            <!--                    </ul>-->
+            <!--                    <ul class="sub-menu-list">-->
+            <!--                        <li><a href="#">신발</a></li>-->
+            <!--                        <li><a href="#">라이프스타일</a></li>-->
+            <!--                        <li><a href="#">축구</a></li>-->
+            <!--                        <li><a href="#">러닝</a></li>-->
+            <!--                        <li><a href="#">테니스</a></li>-->
+            <!--                        <li><a href="#">골프</a></li>-->
+            <!--                        <li><a href="#">샌들 & 슬리퍼</a></li>-->
+            <!--                        <li><a href="#">트레이닝 & 짐</a></li>-->
+            <!--                    </ul>-->
+            <!--                    <ul class="sub-menu-list">-->
+            <!--                        <li><a href="#">의류</a></li>-->
+            <!--                        <li><a href="#">민소매 & 탱크 탑</a></li>-->
+            <!--                        <li><a href="#">반팔 티셔츠</a></li>-->
+            <!--                        <li><a href="#">ACG</a></li>-->
+            <!--                        <li><a href="#">러닝</a></li>-->
+            <!--                        <li><a href="#">탑 & 티셔츠</a></li>-->
+            <!--                    </ul>-->
+            <!--                    <ul class="sub-menu-list">-->
+            <!--                        <li><a href="#">용품</a></li>-->
+            <!--                        <li><a href="#">모자 & 헤드밴드</a></li>-->
+            <!--                        <li><a href="#">축구</a></li>-->
+            <!--                        <li><a href="#">가방</a></li>-->
+            <!--                        <li><a href="#">장갑</a></li>-->
+            <!--                        <li><a href="#">농구</a></li>-->
+            <!--                    </ul>-->
+            <!--                </li>-->
+            <li id="sale-menu">
+                <ul class="sub-menu-list">
+                    <li><a href="#">New & Featured</a></li>
+                    <li><a href="#">신제품 전체</a></li>
+                    <li><a href="#">베스트셀러</a></li>
+                </ul>
+                <ul class="sub-menu-list">
+                    <li><a href="#">신발</a></li>
+                    <li><a href="#">라이프스타일</a></li>
+                    <li><a href="#">축구</a></li>
+                    <li><a href="#">러닝</a></li>
+                    <li><a href="#">테니스</a></li>
+                    <li><a href="#">골프</a></li>
+                    <li><a href="#">샌들 & 슬리퍼</a></li>
+                    <li><a href="#">트레이닝 & 짐</a></li>
+                </ul>
+                <ul class="sub-menu-list">
+                    <li><a href="#">의류</a></li>
+                    <li><a href="#">민소매 & 탱크 탑</a></li>
+                    <li><a href="#">반팔 티셔츠</a></li>
+                    <li><a href="#">ACG</a></li>
+                    <li><a href="#">러닝</a></li>
+                    <li><a href="#">탑 & 티셔츠</a></li>
+                </ul>
+                <ul class="sub-menu-list">
+                    <li><a href="#">용품</a></li>
+                    <li><a href="#">모자 & 헤드밴드</a></li>
+                    <li><a href="#">축구</a></li>
+                    <li><a href="#">가방</a></li>
+                    <li><a href="#">장갑</a></li>
+                    <li><a href="#">농구</a></li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+</header>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main-layout}"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>KOREA NIKE</title>
+    <link rel="stylesheet" href="/static/css/main.css" th:href="@{/css/main.css}">
+    <script src="https://kit.fontawesome.com/d19fdaba43.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"></script>
+    <script src="https://unpkg.com/embla-carousel-autoplay/embla-carousel-autoplay.umd.js"></script>
+    <script src="../static/js/user/main.js" th:src="@{/js/main.js}" defer></script>
+    <script src="../static/js/user/main_carousell.js" th:src="@{/js/user/main_carousell.js}" defer></script>
+
+</head>
+<body>
+
+<main layout:fragment="main">
+    <section id="main-top-section" class="embla">
+        <ul class="embla__container">
+            <li class="embla__slide">
+                <video src="https://filacdn.styleship.com/filacontent2/data/ContentsFile/0325_FILA_SUMMER_01_SHORT.mp4" autoplay muted loop></video>
+            </li>
+            <li class="embla__slide">
+                <img src="https://filacdn.styleship.com/filacontent2/data/banner/img_M_top_COLD%20WAVE_d_240516_93.jpg" alt="#">
+            </li>
+        </ul>
+    </section>
+
+    <section id="main-popular-items-section">
+        <div class="popular-items-select-btn-div">
+            <button>신제품</button>
+            <button>인기상품</button>
+            <button>베스트셀러</button>
+        </div>
+
+        <div class="popular-item-container">
+            <div class="item">
+                <div class="item-img" style="background-image: url('https://assets.adidas.com/images/w_600,f_auto,q_auto/5ee89be58e27428fb20ebbe1f7fe7aa2_9366/Grey_ID6514_01_standard.jpg')">
+                    <i class="fa-regular fa-heart"></i>
+                    <span class="price">69,000 원</span>
+                </div>
+                <h4>클라우드폼 무브 라운저</h4>
+                <span class="category">Shoes</span>
+            </div>
+            <div class="item">
+                <div class="item-img" style="background-image: url('https://assets.adidas.com/images/w_600,f_auto,q_auto/5ee89be58e27428fb20ebbe1f7fe7aa2_9366/Grey_ID6514_01_standard.jpg')">
+                    <i class="fa-regular fa-heart"></i>
+                    <span class="price">69,000 원</span>
+                </div>
+                <h4>클라우드폼 무브 라운저</h4>
+                <span class="category">Shoes</span>
+            </div>
+            <div class="item">
+                <div class="item-img" style="background-image: url('https://assets.adidas.com/images/w_600,f_auto,q_auto/5ee89be58e27428fb20ebbe1f7fe7aa2_9366/Grey_ID6514_01_standard.jpg')">
+                    <i class="fa-regular fa-heart"></i>
+                    <span class="price">69,000 원</span>
+                </div>
+                <h4>클라우드폼 무브 라운저</h4>
+                <span class="category">Shoes</span>
+            </div>
+            <div class="item">
+                <div class="item-img" style="background-image: url('https://assets.adidas.com/images/w_600,f_auto,q_auto/5ee89be58e27428fb20ebbe1f7fe7aa2_9366/Grey_ID6514_01_standard.jpg')">
+                    <i class="fa-regular fa-heart"></i>
+                    <span class="price">69,000 원</span>
+                </div>
+                <h4>클라우드폼 무브 라운저</h4>
+                <span class="category">Shoes</span>
+            </div>
+            <div class="item">
+                <div class="item-img" style="background-image: url('https://assets.adidas.com/images/w_600,f_auto,q_auto/5ee89be58e27428fb20ebbe1f7fe7aa2_9366/Grey_ID6514_01_standard.jpg')">
+                    <i class="fa-regular fa-heart"></i>
+                    <span class="price">69,000 원</span>
+                </div>
+                <h4>클라우드폼 무브 라운저</h4>
+                <span class="category">Shoes</span>
+            </div>
+        </div>
+    </section>
+
+<!--    <section id="your-lacoste" class="embla">-->
+<!--        <h1>당신만의 라코스테</h1>-->
+<!--        <ul class="embla__container">-->
+<!--            <li class="embla__slide">-->
+<!--                <img class="your-lacoste-img" src="https://imageapac1.lacoste.com/dw/image/v2/BBCL_PRD/on/demandware.static/-/Library-Sites-LacosteContent/default/dw9fe1b0b8/2024/SS24/homepage/202406/240601-HP-look-1-mix2.jpg?imwidth=840&impolicy=custom" alt="#">-->
+<!--                <div class="your-lacoste-div">ss24신상품7%할인</div>-->
+<!--            </li>-->
+<!--            <li class="embla__slide">-->
+<!--                <img class="your-lacoste-img" src="https://imageapac1.lacoste.com/dw/image/v2/BBCL_PRD/on/demandware.static/-/Library-Sites-LacosteContent/default/dw8ec866b1/2024/SS24/homepage/202405/240516-HP-slider-benefit.jpg?imwidth=840&impolicy=custom" alt="#">-->
+<!--                <div class="your-lacoste-div">이달의 혜택</div>-->
+<!--            </li>-->
+
+<!--            <li class="embla__slide">-->
+<!--                <img class="your-lacoste-img" src="https://imageapac1.lacoste.com/dw/image/v2/BBCL_PRD/on/demandware.static/-/Library-Sites-LacosteContent/default/dw710bd88a/2024/SS24/homepage/202404/240405-HP%20TILE_GENDER%20SLIDER%20CARD-polo.jpg?imwidth=840&impolicy=custom" alt="#">-->
+<!--                <div class="your-lacoste-div">에센셜 폴로셔츠</div>-->
+<!--            </li>-->
+<!--            <li class="embla__slide">-->
+<!--                <img src="https://imageapac1.lacoste.com/dw/image/v2/BBCL_PRD/on/demandware.static/-/Library-Sites-LacosteContent/default/dw0967e29e/2024/SS24/homepage/202405/340521-HP%20TILE_GENDER%20SLIDER%20CARD.jpg?imwidth=840&impolicy=custom" alt="#">-->
+<!--                <div class="your-lacoste-div">드레스&스커트</div>-->
+<!--            </li>-->
+
+<!--            <li class="embla__slide">-->
+<!--                <img class="your-lacoste-img" src="https://imageapac1.lacoste.com/dw/image/v2/BBCL_PRD/on/demandware.static/-/Library-Sites-LacosteContent/default/dw41ae105d/2024/SS24/homepage/202405/240504-HP%20TILE_GENDER%20SLIDER%20CARD.jpg?imwidth=840&impolicy=custom" alt="#">-->
+<!--                <div class="your-lacoste-div" >비즈니스 캐쥬얼, 셔츠</div>-->
+<!--            </li>-->
+<!--            <li class="embla__slide">-->
+<!--                <img class="your-lacoste-img" src="https://imageapac1.lacoste.com/dw/image/v2/BBCL_PRD/on/demandware.static/-/Library-Sites-LacosteContent/default/dw15504d95/2024/SS24/homepage/202403/240329-silder-02.jpg?imwidth=840&impolicy=custom" alt="#">-->
+<!--                <div class="your-lacoste-div">멤버 전용 제품</div>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </section>-->
+</main>
+
+</body>
+</html>
+
+
+
+
+
+

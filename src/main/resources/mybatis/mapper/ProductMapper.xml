@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.koreamall.mapper.ProductMapper">
+
+    <resultMap id="selectProductWithCategoryAndImageMap" type="ProductDTO" autoMapping="true">
+        <id property="no" column="product_no" />
+        <result property="name" column="product_name" />
+        <association property="category" javaType="CategoryDTO">
+            <id property="no" column="category_no" />
+            <result property="name" column="category_name" />
+        </association>
+        <collection property="images" ofType="FileDTO" javaType="list" autoMapping="true">
+            <id property="UUID" column="image_no" />
+        </collection>
+    </resultMap>
+
+    <resultMap id="categoryMap" type="CategoryDTO">
+        <id property="no" column="c1_no" />
+        <result property="name" column="c1_name" />
+        <collection property="children" ofType="CategoryDTO" javaType="list">
+            <id property="no" column="c2_no" />
+            <result property="name" column="c2_name" />
+            <collection property="children" ofType="CategoryDTO" javaType="list">
+                <id property="no" column="c3_no" />
+                <result property="name" column="c3_name" />
+            </collection>
+        </collection>
+    </resultMap>
+
+    <select id="selectProductByNo" resultType="ProductDTO" resultMap="selectProductWithCategoryAndImageMap">
+        SELECT
+        P.`no` AS 'product_no',
+        PI.`no` AS 'image_no',
+        P.*, PI.*
+        FROM `product` P
+        INNER JOIN `product_img` PI
+        ON `P`.`no` = PI.`product_no`
+        WHERE P.`no` = #{no}
+    </select>
+
+    <select id="selectProductsByCategoryNo" resultType="ProductDTO" resultMap="selectProductWithCategoryAndImageMap">
+        WITH RECURSIVE `category_cte` AS (
+        SELECT `no`, `name`
+        FROM `category`
+        WHERE `no` = #{categoryNo}
+        UNION ALL
+        SELECT C.`no`, C.`name`
+        FROM `category` C
+        INNER JOIN `category_cte` CT
+        ON C.`parent` = CT.`no`
+        )SELECT
+        CT.`no` AS 'category_no',
+        CT.`name` AS 'category_name',
+        P.`no` AS 'product_no',
+        P.`name` AS 'product_name',
+        PI.`no` AS 'image_no',
+        P.*, PI.*
+        FROM `category_cte` CT
+        INNER JOIN `product` P
+        ON P.`category_no` = CT.`no`
+        INNER JOIN `product_img` PI
+        ON `P`.`no` = PI.`product_no`
+        ORDER BY `P`.`no`
+    </select>
+
+    <select id="selectCategories" resultType="CategoryDTO" resultMap="categoryMap">
+        SELECT
+        C1.`no` c1_no, C1.`name` c1_name,
+        C2.`no` c2_no, C2.`name` c2_name,
+        C3.`no` c3_no, C3.`name` c3_name
+        FROM `category` C1
+        INNER JOIN `category` C2
+        ON C1.`no` = C2.`parent`
+        INNER JOIN `category` C3
+        ON C2.`no` = C3.`parent`
+        ORDER BY C1.`no`, C2.`no`, C3.`no`
+    </select>
+
+    <select id="selectCategory" resultType="CategoryDTO" resultMap="categoryMap">
+        SELECT
+        C1.`no` c1_no, C1.`name` c1_name,
+        C2.`no` c2_no, C2.`name` c2_name,
+        C3.`no` c3_no, C3.`name` c3_name
+        FROM `category` C1
+        INNER JOIN `category` C2
+        ON C1.`no` = C2.`parent`
+        INNER JOIN `category` C3
+        ON C2.`no` = C3.`parent`
+        WHERE C2.`no` = (
+        SELECT DISTINCT CC1.`no` FROM `category` CC1
+        INNER JOIN `category` CC2
+        ON CC1.`no` = CC2.`parent`
+        WHERE CC1.`no` = #{categoryNo} OR CC2.`no` = #{categoryNo} AND CC1.`parent` IS NOT NULL
+        )
+        ORDER BY C1.`no`, C2.`no`, C3.`no`
+    </select>
+
+</mapper>

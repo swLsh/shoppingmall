@@ -1,0 +1,239 @@
+main{
+    margin: 200px 0;
+}
+:root {
+    --color-main: #002053;
+    --color-red: #cd0a20;
+    --color-gray: #767676;
+    --color-light-gray: #f5f5f5;
+}
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.all-product-section {
+    display: flex;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    position: relative;
+}
+
+
+#product-image-section {
+    width: 60%;
+    padding-right: 40px;
+}
+
+#product-image-section ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+#product-image-section img {
+    width: calc(50% - 5px);
+    height: auto;
+}
+
+#model-cut-h1 {
+    text-align: center;
+    font-size: 24px;
+    margin: 40px 0 20px;
+}
+
+.embla {
+    overflow: hidden;
+    max-width: 100%;
+
+}
+
+.embla__container {
+    display: flex;
+  }
+
+.embla__slide {
+    flex: 0 0 100%;
+    min-width: 0;
+}
+
+.img-slide {
+    width: 100%;
+    height: auto;
+    justify-content: center;
+}
+
+
+.model-information-div {
+    font-size: 14px;
+    color: var(--color-gray);
+    margin-top: 10px;
+    text-align: center;
+}
+
+#product-description-section {
+    width: 40%;
+    position: sticky;
+    top: 20px;
+    align-self: flex-start;
+}
+
+#product-description-section > div:first-child {
+    font-size: 14px;
+    color: var(--color-gray);
+    margin-bottom: 10px;
+}
+
+#product-description-section h1 {
+    font-size: 24px;
+    margin: 0 0 10px;
+}
+
+#product-description-section > div:nth-child(3) {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+#product-description-section > div:nth-child(n+4):nth-child(-n+6) {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+#product-description-section > div:nth-child(7) {
+    font-size: 12px;
+    color: var(--color-gray);
+    margin-top: 20px;
+}
+
+#product-description-section > div:last-child {
+    font-size: 12px;
+    color: var(--color-main);
+    text-decoration: underline;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#product-select-buttons-section {
+    width: 40%;
+    position: sticky;
+    top: 20px;
+    align-self: flex-start;
+}
+
+#product-select-buttons-section > div:first-child {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#product-select-buttons-section button {
+    padding: 10px 15px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+#product-select-buttons-section button:hover {
+    border-color: var(--color-main);
+}
+.product-select-buttons-section .select-buttons > button[selected]{
+    opacity: 0.3;
+}
+.product-select-buttons-section .colors > button{
+    padding: 12px 10px;
+}
+.product-select-buttons-section .sizes > button{
+    background-color: rgba(200,200,200,0.1);
+    width: 70px;
+}
+
+.amount-label {
+    display: flex;
+    margin: 20px 0;
+    border: 1px solid #ddd;
+}
+
+.amount-label button {
+    background-color: #f5f5f5;
+    border: none;
+    outline: none;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+.amount-label input {
+    flex-grow: 1;
+    text-align: center;
+    border: none;
+    font-size: 16px;
+}
+
+.buy-button {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+
+
+.product-review {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    margin-top: 40px;
+}
+
+.recommend-product-section {
+    max-width: 1280px;
+    margin: 60px auto;
+    padding: 0 20px;
+}
+
+.recommend-product-section h3 {
+    font-size: 24px;
+    margin-bottom: 30px;
+}
+
+.recommend-item-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.recommend-item-container .item {
+    width: 23%;
+    text-decoration: none;
+    color: #333;
+}
+
+.recommend-item-container img {
+    width: 100%;
+    height: auto;
+}
+
+.recommend-item-container h4 {
+    font-size: 14px;
+    margin: 10px 0 5px;
+}
+
+.recommend-item-container .price {
+    font-size: 16px;
+    font-weight: bold;
+}

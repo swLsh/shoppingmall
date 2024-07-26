@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main-layout}"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>상품리스트</title>
+    <link rel="stylesheet" href="/static/css/public/public.css" th:href="@{/css/public/public.css}">
+    <link rel="stylesheet" href="/static/css/list.css" th:href="@{/css/list.css}">
+
+    <script src="https://kit.fontawesome.com/d19fdaba43.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<main layout:fragment="main">
+    <section class="filter-section">
+        <nav>
+            <a>MEN</a>
+            <a>신발</a>
+        </nav>
+
+        <div class="filter-container">
+            <button type="button" id="filter-on-off-btn">
+                <span>필터</span>
+                <i class="fa-solid fa-minus"></i>
+                <!--                <i class="fa-solid fa-plus"></i>-->
+            </button>
+
+            <div class="filter-select-container">
+                <label>
+                    <select>
+                        <option>신상품순</option>
+                        <option>판매순</option>
+                        <option>리뷰순</option>
+                        <option>낮은가격순</option>
+                        <option>높은가격순</option>
+                    </select>
+                </label>
+
+
+                <div class="product-list-view-select-container">
+                    <button id="list-view-btn"><i class="fa-solid fa-list"></i></button>
+                    <button id="grid-view-btn"><i class="fa-solid fa-grip"></i></button>
+                </div>
+            </div>
+        </div>
+
+
+
+    </section>
+
+    <div class="section-container">
+        <aside>
+            <div>
+                <ul class="category-list">
+                    <li active>
+                        <a href="#" th:href="@{/product(category=${category.children[0].no})}">전체</a>
+                        <span>182</span>
+                    </li>
+                    <li th:each="category3: ${category.children[0].children}">
+                        <a href="#" th:text="${category3.name}">라이프스타일</a>
+                        <span>182</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div>
+                <button>
+                    <span>색상</span>
+                    <i class="fa-solid fa-caret-up"></i>
+                    <!--                    <i class="fa-solid fa-caret-down"></i>-->
+                </button>
+                <ul class="color-list">
+                    <th:block th:each="color: ${colors}">
+                        <li class="beige" th:class="${color}"></li>
+                    </th:block>
+                </ul>
+            </div>
+
+            <div>
+                <button>
+                    <span>가격</span>
+                    <i class="fa-solid fa-caret-up"></i>
+                    <!--                    <i class="fa-solid fa-caret-down"></i>-->
+                </button>
+                <ul class="price-list">
+                    <li>
+                        <label>
+                            <input type="checkbox">
+                            <span>39,000 이하</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox">
+                            <span>39,000 이하</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox">
+                            <span>39,000~49,000</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox">
+                            <span>39,000~59,000</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox">
+                            <span>59,000~79,000</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox">
+                            <span>79,000 초과</span>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+
+        </aside>
+
+        <div>
+            <section class="product-list-section list">
+                <div class="item" th:each="product: ${products}">
+                    <a th:href="|/product/${product.no}|" class="item-img" th:style="|background-image: url('data:image/*;base64,${product.images[0].url}')|"></a>
+                    <span class="category" th:text="${product.category.name}">Shoes</span>
+                    <h4>
+                        <a th:href="|/product/${product.no}|" th:text="${product.name}">클라우드폼 무브 라운저</a>
+                    </h4>
+                    <span class="price" th:text="${#numbers.formatInteger(product.price, 3, 'COMMA')}">69,000 원</span>
+                    <i class="fa-regular fa-heart"></i>
+                </div>
+                <!--                    <div class="item">-->
+                <!--                        <div class="item-img" style="background-image: url('https://assets.adidas.com/images/w_600,f_auto,q_auto/5ee89be58e27428fb20ebbe1f7fe7aa2_9366/Grey_ID6514_01_standard.jpg')"></div>-->
+                <!--                        <span class="category">Shoes</span>-->
+                <!--                        <h4>클라우드폼 무브 라운저</h4>-->
+                <!--                        <span class="price">69,000 원</span>-->
+                <!--                        <i class="fa-regular fa-heart"></i>-->
+                <!--                    </div>-->
+            </section>
+
+            <nav class="pagination-nav">
+                <ul class="pagination">
+                    <li><a href="#"><i class="fa-solid fa-angle-left"></i></a></li>
+                    <li active><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#"><i class="fa-solid fa-angle-right"></i></a></li>
+                </ul>
+            </nav>
+        </div>
+
+
+    </div>
+
+</main>
+</body>
+</html>

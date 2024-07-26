@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main-layout}"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>KOREA | 작성 </title>
+    <script src="https://kit.fontawesome.com/d19fdaba43.js" crossorigin="anonymous"></script>
+
+
+    <link rel="stylesheet" href="../../static/css/write.css" th:href="@{/css/customer_service/write.css}">
+    <script src="../../static/js/customer_service/write.js" th:src="@{/js/customer_service/write.js}" defer></script>
+
+</head>
+<body>
+<main layout:fragment="main">
+    <div class="faq-title">
+        <h1>고객센터</h1>
+        <span>무엇을 도와드릴까요?</span>
+    </div>
+
+
+    <form th:action="@{/customer_service/write}" method="POST" enctype="multipart/form-data">
+        <section class="faq-input-container">
+            <div class="faq-input">
+                <label for="title">제목</label>
+                <input type="text" id="title" name="title">
+            </div>
+            <div class="faq-input">
+                <label for="writer">작성자</label>
+                <input type="text" id="writer" name="writer">
+            </div>
+            <div class="faq-input">
+                <label>공개여부</label>
+                <section>
+                    <label>공개<input type="radio" name="isOpened" value="true" checked></label>
+                    <label>비공개<input type="radio" name="isOpened" value="false"></label>
+                    <label id="lock">암호설정<input type="number" name="password" minlength="4" maxlength="6" max="999999" placeholder="4 - 6길이의 숫자" disabled></label>
+                </section>
+            </div>
+            <div class="faq-input">
+                <label>
+                    <span>첨부파일</span>
+                    <button type="button" id="file-plus-btn">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                </label>
+                <section id="files-container">
+                    <div class="files">
+                        <button type="button" onclick="remove_file_div(this)" class="file-minus-btn">
+                            <i class="fa-solid fa-minus"></i>
+                        </button>
+                        <input type="file" name="files">
+                    </div>
+                </section>
+            </div>
+        </section>
+
+        <section class="faq-textarea-container">
+            <label>
+                <textarea name="content" placeholder="내용을 작성하세요..."></textarea>
+            </label>
+        </section>
+
+        <section class="faq-btn-container">
+            <button type="button" onclick="location.href = '/customer_service/one_on_one'">취소</button>
+            <button type="submit" >확인</button>
+        </section>
+    </form>
+</main>
+
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main-layout}"
+>
+<head>
+  <meta charset="UTF-8">
+  <title>KOREA SHOP | FAQ</title>
+  <link rel="stylesheet" href="../../static/css/one-on-one.css" th:href="@{/css/customer_service/one-on-one.css}">
+  <script th:src="@{/js/customer_service/one-on-one.js}" defer></script>
+  <script src="https://kit.fontawesome.com/d19fdaba43.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="css/customer_service/one-on-one.css">
+</head>
+<body>
+<main layout:fragment="main">
+  <th:block th:if="${isError}">
+    <script>
+      alert('해당 게시물은 비밀번호를 입력해야 합니다!');
+    </script>
+  </th:block>
+  <header th:replace="~{customer_service/layout/header :: header}"></header>
+<!--  <section id="faq-header">-->
+<!--    <div class="faq-title">-->
+<!--      <h1>고객센터</h1>-->
+<!--      <span>무엇을 도와드릴까요?</span>-->
+<!--    </div>-->
+<!--    <nav>-->
+<!--      <ul>-->
+<!--        <li><a href="/customer_service/faq">FAQ</a></li>-->
+<!--        <li><a href="/customer_service/one_on_one">1:1문의</a></li>-->
+<!--      </ul>-->
+<!--      <form class="faq-search-section">-->
+<!--        <label id="faq-search-word"><input type="text" name="query" placeholder="질문 키워드를 입력해주세요"></label>-->
+<!--        <label id="faq-search-keyword">-->
+<!--          <select name="keyword">-->
+<!--            <option value="title">제목</option>-->
+<!--            <option value="writer">작성자</option>-->
+<!--            <option value="content">내용</option>-->
+<!--          </select>-->
+<!--        </label>-->
+<!--        <button id="faq-search-btn" type="submit">검색</button>-->
+<!--      </form>-->
+<!--    </nav>-->
+<!--  </section>-->
+
+  <section id="faq-board-section">
+    <table>
+      <colgroup>
+        <col class="no">
+        <col class="title">
+        <col class="write-date">
+        <col class="writer">
+        <col class="view-count">
+        <col class="is-opened">
+        <col class="is-answered">
+      </colgroup>
+      <thead>
+      <tr>
+        <th>번호</th>
+        <th>제목</th>
+        <th>작성날짜</th>
+        <th>작성자</th>
+        <th>조회수</th>
+        <th>공개여부</th>
+        <th>답변여부</th>
+      </tr>
+      </thead>
+
+
+      <tbody>
+      <tr th:each="oneOnOne, stat: ${oneOnOnes}">
+        <td th:text="${stat.count}">번호</td>
+        <td><a th:href="@{|/customer_service/view/${oneOnOne.no}|}" th:text="${oneOnOne.title}" th:onclick="|check_is_opened(${oneOnOne.no}, event);|">제목</a></td>
+        <td th:text="${#temporals.format(oneOnOne.writeDateTime, 'yyyy-MM-dd')}">작성날짜</td>
+        <td th:text="${oneOnOne.writer}">작성자</td>
+        <td th:text="${oneOnOne.viewCount}">조회수</td>
+        <td th:text="${oneOnOne.isOpened ? '공개' : '비공개'}">공개여부</td>
+        <td th:text="${oneOnOne.isAnswered ? 'Y' : 'N'}">답변여부</td>
+      </tr>
+
+      </tbody>
+    </table>
+
+    <div>
+      <button type="button" id="faq-write-btn" onclick="location.href = '/customer_service/write'">문의작성</button>
+    </div>
+
+    <nav class="pagination-nav">
+      <ul class="pagination">
+        <li><a href="#"><i class="fa-solid fa-angle-left"></i></a></li>
+        <li active><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#"><i class="fa-solid fa-angle-right"></i></a></li>
+      </ul>
+    </nav>
+
+
+
+  </section>
+
+
+</main>
+</body>
+</html>

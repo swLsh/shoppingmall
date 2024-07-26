@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main-layout}"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>로그인 페이지</title>
+
+    <script src="https://kit.fontawesome.com/d19fdaba43.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../../static/css/user/login.css" th:href="@{/css/user/login.css}">
+</head>
+<body>
+<main layout:fragment="main">
+    <h1>HOONDORI MARKET</h1>
+    <form method="post">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+        <section id="login-info-section">
+            <label>
+                <i class="fa-regular fa-user"></i>
+                <input type="text" name="id">
+            </label>
+            <label>
+                <i class="fa-solid fa-lock"></i>
+                <input type="text" name="password">
+                <i class="fa-solid fa-eye"></i>
+            </label>
+        </section>
+        <section id="login-id-remember-section">
+            <label>
+                <input type="checkbox">
+                <span>아이디 저장</span>
+            </label>
+        </section>
+        <button id="login-btn">로그인</button>
+    </form>
+    <section id="nav-section">
+        <a href="#">아이디 찾기</a>
+        <a href="#">비밀번호 재설정</a>
+        <a href="/user/register">회원가입</a>
+    </section>
+    <section id="simple-login-section">
+        <h4>간편 로그인</h4>
+        <a href="/oauth2/authorization/naver">
+            <img src="/../static/images/btnG_아이콘원형.png" th:src="@{/images/btnG_아이콘원형.png}" height="45" width="90" alt="#"/>
+        </a>
+        <a href="/oauth2/authorization/kakao">
+            <img src="../../static/images/kakao_login_small.png" th:src="@{/images/kakao_login_small.png}" height="45" width="90" alt="#"/>
+        </a>
+        <a href="/oauth2/authorization/google">
+            <img src="../../static/images/logo-toss-symbol-alpha.png" th:src="@{/images/logo-toss-symbol-alpha.png}"  height="45" width="90" alt="#"/>
+        </a>
+    </section>
+</main>
+<footer></footer>
+</body>
+</html>
+
+

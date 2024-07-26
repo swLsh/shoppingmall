@@ -1,0 +1,144 @@
+@font-face {
+    font-family: 'adobaonlyR';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/adobaonlyR.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+
+    font-family: 'adobaonlyR';
+
+    --color--title:#F5DB3C;
+    --color-strong: #09F528;
+    --color-yellow: #53F579;
+    --color-weak: #58F541;
+    --color-orange: #0FF592;
+    --color-green: #08F43F;
+    --color-main: #70F588;
+
+    --font-size-xx-small: 10px;
+    --font-size-x-small: 13px;
+    --font-size-small: 15px;
+    --font-size-medium: 18px;
+    --font-size-large: 20px;
+    --font-size-x-large: 22px;
+    --font-size-xx-large: 25px;
+    --color-weak-gray: rgba(0,0,0,0.2);
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+
+
+main{
+    width: 500px;
+    margin: 300px auto;
+}
+
+h1{
+    margin: 20px 0;
+    text-align: center;
+    color: var(--color--title);
+}
+
+/********************************/
+#login-info-section{
+    border: 1px solid var(--color-weak-gray);
+    border-radius: 5px;
+}
+#login-info-section > label{
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    font-size: var(--font-size-medium);
+}
+#login-info-section > label:first-child{
+    border-bottom: 1px solid var(--color-weak-gray);
+}
+
+#login-info-section input{
+    flex: 1;
+    font-size: var(--font-size-medium);
+    border: none;
+    outline: none;
+}
+
+#login-info-section > label > i:first-child{
+    margin-right: 10px;
+}
+#login-info-section > label > i:last-child{
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+/****************************************/
+#login-id-remember-section{
+    margin: 10px 0;
+}
+
+#login-id-remember-section span{
+    color: rgba(0,0,0,0.6);
+}
+/************************/
+#login-btn{
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px 0;
+    font-size: var(--font-size-large);
+    border: none;
+    border-radius: 5px;
+    background-color: var(--color-strong);
+    cursor: pointer;
+}
+#login-btn:hover{
+    opacity: 0.8;
+}
+/*******************************/
+#nav-section{
+    margin: 5px 0 15px 0;
+    text-align: center;
+}
+#nav-section a{
+    margin: 0 5px;
+    color: rgba(0,0,0,0.5);
+    font-size: var(--font-size-small);
+}
+#nav-section a:hover{
+    opacity: 0.8;
+}
+
+
+
+/*******************************/
+#simple-login-section{
+    margin-top: 45px;
+    text-align: center;
+}
+#simple-login-section h4{
+    margin: 20px;
+    font-size: var(--font-size-medium);
+}
+#simple-login-section a{
+    display: inline-block;
+    width: 50px;
+    text-align: center;
+    padding: 0 15px;
+   }
+#simple-login-section a:nth-child(3){
+    width: 80px;
+}
+#simple-login-section a:last-child{
+    border: none;
+}
+
+#simple-login-section img{
+    width: 100%;
+}
+/******************************/
+
+
+

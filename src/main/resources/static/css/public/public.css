@@ -1,0 +1,261 @@
+@font-face {
+    font-family: 'Thin';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-1Thin.woff2') format('woff2');
+    font-weight: 100;
+    font-style: normal;
+}
+font-face {
+    font-family: 'ExtraLight';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-2ExtraLight.woff2') format('woff2');
+    font-weight: 200;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Light';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-3Light.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-4Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Medium';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-5Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'SemiBold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-6SemiBold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Bold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-7Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'ExtraBold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-8ExtraBold.woff2') format('woff2');
+    font-weight: 800;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Black';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2') format('woff2');
+    font-weight: 900;
+    font-style: normal;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    font-family: Regular;
+
+    --color-strong: #F5CF49;
+    --color-yellow: #E8F549;
+    --color-weak: #F5E449;
+    --color-orange: #F5BA49;
+    --color-green: #A1F549;
+    --color-main: #F9F5D1;
+    --color-weak-gray: rgba(0,0,0,0.2);
+    --color-medium-gray: rgba(0, 0, 0, 0.5);
+
+    --font-size-xx-small: 10px;
+    --font-size-x-small: 13px;
+    --font-size-small: 15px;
+    --font-size-medium: 18px;
+    --font-size-large: 20px;
+    --font-size-x-large: 22px;
+    --font-size-xx-large: 25px;
+    --font-size-xxx-large: 30px;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+li{
+    display: inline-block;
+    list-style: none;
+}
+
+.ADOBE-ROSE{background-color: mistyrose}
+.APPLE-GREEN{background-color: green}
+.APRICOT{background-color: rosybrown}
+.AQUA{background-color: aqua}
+.BAMBOO{background-color: rosybrown}
+.BEIGE{background-color: beige}
+.BIELLA-OFF-WHITE{background-color: rosybrown}
+.BLACK{background-color: black}
+.BLACK-COFFEE{background-color: black}
+.BLACK-PATTERN{background-color: black}
+.BLUE{background-color: blue}
+.RICK{background-color: rosybrown}
+.BRIGHT-PINK{background-color: rosybrown}
+.BROWN{background-color: brown}
+.BURGUNDY{background-color: rosybrown}
+.BUTTER-YELLOW{background-color: lightgoldenrodyellow}
+.CAMEL{background-color: moccasin}
+.CARBON{background-color: rosybrown}
+.CERULEAN{background-color: rosybrown}
+.CHARCOAL-GREY{background-color: lightslategrey}
+.CHILI{background-color: rosybrown}
+.CLOUD{background-color: rosybrown}
+.COBALT{background-color: rosybrown}
+.COOL-GREY{background-color: grey}
+.CORAL{background-color: coral}
+.CORAL-BLUSH{background-color: rosybrown}
+.CORAL-ORANGE{background-color: rosybrown}
+.CREAM{background-color: mintcream}
+.DARK-BEIGE{background-color: rosybrown}
+.DARK-BROWN{background-color: rosybrown}
+.DARK-GREEN{background-color: rosybrown}
+.DARK-GREY{background-color: rosybrown}
+.DARK-INDIGO{background-color: indigo}
+.DARK-KHAKI{background-color: khaki}
+.DARK-MINT{background-color: mintcream}
+.DARK-NAVY{background-color: navy}
+.DARK-RED{background-color: red}
+.DARK-TEAL{background-color: rosybrown}
+.DARK-VIOLET{background-color: violet}
+.DARK-WINE{background-color: rosybrown}
+.DEEP-GREEN{background-color: green}
+.DEEP-MAROON{background-color: rosybrown}
+.DENIM{background-color: rosybrown}
+.DRY-ROSE{background-color: rosybrown}
+.DUSTY-GREEN{background-color: rosybrown}
+.DUSTY-PINK{background-color: rosybrown}
+.EARL-GREY{background-color: rosybrown}
+.ELECTRIC-BLUE{background-color: rosybrown}
+.FILA-DNA-RED{background-color: rosybrown}
+.FOREST-GREEN{background-color: rosybrown}
+.FRENCH-BLUE{background-color: rosybrown}
+.FUCHSIA{background-color: rosybrown}
+.GOLDEN-YELLOW{background-color: rosybrown}
+.GRASS-GREEN{background-color: rosybrown}
+.GREEN{background-color: rosybrown}
+.GREISH-BLUE{background-color: rosybrown}
+.GREIYSH-KHAKI{background-color: rosybrown}
+.GREY{background-color: rosybrown}
+.GREYISH-PURPLE{background-color: rosybrown}
+.GREYISH-TEAL{background-color: rosybrown}
+.GREYISH-VIOLET{background-color: rosybrown}
+.HOT-PINK{background-color: hotpink}
+.HRD{background-color: rosybrown}
+.ICE-GREY{background-color: grey}
+.INDIAN-PINK{background-color: pink}
+.IND-IGO-BLUE{background-color: rosybrown}
+.INK-NAVY{background-color: navy}
+.IVORY{background-color: ivory}
+.IVY-GREEN{background-color: seagreen}
+.JADE{background-color: seagreen}
+.JET-BLACK{background-color: black}
+.KHAKI{background-color: khaki}
+.LALAC{background-color: rosybrown}
+.LAVENDE{background-color: rosybrown}
+.LAVENDER{background-color: rosybrown}
+.LAVENDER-GREY{background-color: rosybrown}
+.LEMON{background-color: rosybrown}
+.LIGHT-BEIGE{background-color: rosybrown}
+.LIGHT-BLUE{background-color: rosybrown}
+.LIGHT-BROWN{background-color: rosybrown}
+.LIGHT-DENIM{background-color: rosybrown}
+.LIGHT-GREEN{background-color: rosybrown}
+.LIGHT-GREY{background-color: rosybrown}
+.LIGHT-KHAKI{background-color: rosybrown}
+.LIGHT-LEMON{background-color: rosybrown}
+.LIGHT-MELANGE{background-color: rosybrown}
+.LIGHT-MINT{background-color: rosybrown}
+.LIGHT-PINK{background-color: rosybrown}
+.LIGHT-PLUM{background-color: rosybrown}
+.LIGHT-RED{background-color: red}
+.LIGHT-SAND{background-color: rosybrown}
+.LIGHT-VIOLET{background-color: violet}
+.LIGHT-YELLOW{background-color: rosybrown}
+.LIGHT-YELLOW-GREEN{background-color: rosybrown}
+.LIME{background-color: lime}
+.MAROON{background-color: rosybrown}
+.MEDIEVAL-BLUE{background-color: rosybrown}
+.MELANGE-GREY{background-color: rosybrown}
+.METAL-BLUE{background-color: rosybrown}
+.MIMOSA{background-color: rosybrown}
+.MINERAL-GREEN{background-color: rosybrown}
+.MINT{background-color: rosybrown}
+.MISTY-BLUE{background-color: darkblue}
+.NATURAL-BEIGE{background-color: beige}
+.NAVY{background-color: navy}
+.NAVY-BLUE{background-color: navy}
+.NEON-PINK{background-color: pink}
+.OAT-MEAL{background-color: rosybrown}
+.OCEAN-BLUE{background-color: skyblue}
+.OFF-WHITE{background-color: whitesmoke}
+.OLIVE{background-color: olive}
+.ORANGE{background-color: orange}
+.ORANGE-RED{background-color: orangered}
+.OYSTER-WHITE{background-color: orange}
+PALE-BEIGE{background-color: rosybrown}
+.PALE-BLUE{background-color: rosybrown}
+.PALE-GREEN{background-color: rosybrown}
+.PALE-GREY{background-color: rosybrown}
+.PALE-LAVENDER{background-color: rosybrown}
+.PALE-LI.ME{background-color: rosybrown}
+.PALE-ORANGE{background-color: rosybrown}
+.PALE-PINK{background-color: rosybrown}
+.PALE-VIOLET{background-color: darkviolet}
+.PALE-YELLOW{background-color: lightgoldenrodyellow}
+.PASTEL-MINT{background-color: mintcream}
+.PEACH{background-color: peachpuff}
+.PEACOCK-BLUE{background-color: cadetblue}
+.PETAL{background-color: rosybrown}
+.PINE-GREEN{background-color: mediumseagreen}
+.PINK{background-color: pink}
+.POPPY-RED{background-color: indianred}
+.POWDER-PINK{background-color: lightpink}
+.PURPLE{background-color: purple}
+.PURPLE-NAVY{background-color: rebeccapurple}
+.PURPLE-BLUE{background-color: mediumpurple}
+.RED{background-color: red}
+.ROSE-PINK{background-color: mistyrose}
+.ROYAL-BLUE{background-color: blue}
+.SAGE{background-color: rosybrown}
+.SALMON{background-color: rosybrown}
+.SAND{background-color: rosybrown}
+.SAND-CREAM{background-color: mintcream}
+.SAND-PINK{background-color: pink}
+.SAND-WHITE{background-color: navajowhite}
+.SCARLET{background-color: rebeccapurple}
+.SENSITIVE-SKIN{background-color: beige}
+.SHINY-GREY{background-color: grey}
+.SKIN{background-color: beige}
+.SKIN-PINK{background-color: pink}
+.SKY-BLUE{background-color: blue}
+.SLATE{background-color: slateblue}
+.SLUB-MELANGE{background-color: cornflowerblue }
+.SMOKY-BLUE{background-color: cornflowerblue}
+.SOFT-PINK{background-color: lightpink}
+.STEEL{background-color: steelblue}
+.STONE{background-color: lightsteelblue}
+.TAN-BEIGE{background-color: beige}
+.TINTED-BLUE{background-color: blue}
+.TRUE-BEIGE{background-color: beige}
+.TURQUOISE{background-color: turquoise}
+.VANILLA{background-color: beige}
+.VINTAGE-BLUE{background-color: powderblue}
+.VIOLET{background-color: violet}
+.VITAMIN{background-color: yellow}
+.WARM-GREY{background-color: lightgrey}
+.WHITE{background-color: white}
+.WHITE-MELANGE{background-color: ghostwhite}
+.WHITEOFF{background-color: whitesmoke}
+.YELLOW{background-color: yellow}
+
+

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main-layout}"
+>
+<head>
+    <meta  charset="UTF-8">
+    <meta th:name="${_csrf.parameterName}" th:content="${-_csrf.token}">
+    <title>결제</title>
+    <script src="https://kit.fontawesome.com/d19fdaba43.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/static/css/user/order.css" th:href="@{/css/user/order.css}">
+    <link rel="stylesheet" href="/static/css/public/public.css"  th:href="@{/css/public/public.css}" >
+    <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="../../static/js/user/order.js" th:src="@{/js/order.js}" defer></script>
+
+</head>
+<body>
+<main layout:fragment="main">
+    <h1>주문 및 결제</h1>
+    <div class="order-container">
+        <section class="order-info-section">
+            <div class="product-summary-container">
+                <h3>주문 상품</h3>
+                <div class="product" th:each="cart: ${carts}" th:with="product=${cart.product}">
+                    <input type="hidden" class="cart-no" th:value="${cart.no}">
+                    <input type="hidden" class="product-no" th:value="${product.no}">
+                    <div class="product-img-container">
+                        <img th:src="|data:image/*;base64, ${product.images[0].url}|" src="https://i.namu.wiki/i/l0x04r27DjSQmS-WgYk6I5x6IkKMyvZjRMyK5dI3EMoMikzCd2Kfl2SMRdvL3-y4zpxI_qLP-fs3QToSR7AU3g.webp" alt="#">
+                    </div>
+                    <div class="product-information-container">
+                        <span class="category" th:text="${product.category.name}">KIDS</span>
+                        <div class="name" th:text="${product.name}">아쿠아 라글란 래쉬가드</div>
+                        <div>
+                            <b>색상:</b>
+                            <span th:text="${cart.color}">IVY GREEN</span>
+                        </div>
+                        <div>
+                            <b>사이즈:</b>
+                            <span th:text="${cart.size}">130</span>
+                        </div>
+                        <div>
+                            <b>수량:</b>
+                            <span th:data="${cart.amount}" th:text="|${cart.amount}개|">3개</span>
+                        </div>
+                        <div class="price">
+                            <b th:text="|${cart.product.price}원|" th:data="${cart.product.price}">123,900원</b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="order-shipping-container">
+                <h3>배송지 정보</h3>
+                <section class="shipping-info">
+                    <div>
+                        <label for="order-user">받는사람</label>
+                        <input id="order-user" type="text">
+                    </div>
+
+                    <div class="order-phone">
+                        <label for="order-phone1">전화번호</label>
+                        <div>
+                            <input id="order-phone1" type="tel" maxlength="3" max="999" />
+                            <label for="order-phone2">-</label>
+                            <input id="order-phone2" type="tel" maxlength="4" max="9999" />
+                            <label for="order-phone3">-</label>
+                            <input id="order-phone3" type="tel" maxlength="4" max="9999" />
+                        </div>
+                    </div>
+
+                    <div class="order-addr">
+                        <label for="order-addr-number">우편번호</label>
+                        <div>
+                            <input id="order-addr-number" type="text" readonly disabled>
+                            <button id="order-find-addr-btn">주소검색</button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="order-addr">주소</label>
+                        <input id="order-addr" type="text" readonly disabled />
+                    </div>
+
+                    <div>
+                        <label for="order-addr-details">상세주소</label>
+                        <input id="order-addr-details" type="text">
+                    </div>
+
+
+
+                    <div>
+                        <label for="order-memo">주문메모</label>
+                        <input id="order-memo" type="text">
+                    </div>
+
+                </section>
+            </div>
+
+            <hr>
+
+            <div class="payment-container">
+                <h3>결제방법</h3>
+                <section class="credit-card-section">
+                    <div class="credit-card-select">
+                        <h5>신용카드</h5>
+                        <i class="fa-regular fa-circle"></i>
+                    </div>
+                </section>
+
+                <section class="simple-payment-section" active>
+                    <div class="credit-card-select">
+                        <h5>간편결제</h5>
+                        <i class="fa-solid fa-circle"></i>
+                    </div>
+                    <div class="credit-cards">
+                        <label id="kakao" active>
+                            <img src="https://developers.kakao.com/tool/resource/static/img/button/pay/payment_icon_yellow_large.png" alt="#">
+                            <input name="payment" type="radio">
+                        </label>
+                        <label id="naver">
+                            <img src="https://rlyfaazj0.toastcdn.net/20230822/111718.573887000/%EB%84%A4%EC%9D%B4%EB%B2%84%ED%8E%98%EC%9D%B4_%EB%A1%9C%EA%B3%A0.png" alt="#">
+                            <input name="payment" type="radio">
+                        </label>
+                        <label id="toss">
+                            <img src="https://framerusercontent.com/images/Drn1qQIO9e99xqU7xmBBG8NjG8.jpg" alt="#">
+                            <input name="payment" type="radio">
+                        </label>
+                    </div>
+                </section>
+            </div>
+
+        </section>
+
+        <section class="order-summary-container">
+            <div>
+                <div>
+                    <span>총 상품금액</span>
+                    <span>733,000원</span>
+                </div>
+                <div>
+                    <span>상품 할인금액</span>
+                    <span>-55,000원</span>
+                </div>
+                <div>
+                    <span>배송비</span>
+                    <span>0원</span>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="total-price">
+                <span>총 결제 예상 금액</span>
+                <span id="total-price" th:data="${#aggregates.sum(carts.![product.price])}" th:text="|${#numbers.formatInteger(#aggregates.sum(carts.![product.price]), 3, 'COMMA')}원|">769,900원</span>
+            </div>
+
+            <button id="order-buy-btn"  type="button" >결제하기</button>
+        </section>
+    </div>
+
+
+</main>
+</body>
+</html>
