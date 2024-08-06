@@ -23,7 +23,6 @@ Shopping mall
 ![web_board_db](https://github.com/user-attachments/assets/4d3732dc-8654-4f6d-b510-d13685b6553c)
 
 
-## ▶️ 시연 영상
 
 <br/>
 
